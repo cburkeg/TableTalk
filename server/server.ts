@@ -1,11 +1,16 @@
 import * as Path from 'node:path'
+import valveRoutes from './routes/valves.ts'
 
 import express from 'express'
+// import valveroutes from './routes/'
 
 const server = express()
 server.use(express.json())
 
+const rootURL = '/api/v1/'
 // ADD YOUR API ROUTES HERE
+
+server.use(rootURL + 'valves', valveRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
