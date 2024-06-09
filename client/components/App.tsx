@@ -6,15 +6,25 @@ import { useState } from 'react'
 function App() {
   // use static test data for now - this data will eventually be replaced by data retrieved via custom hook
   const testData: Data = [
-    { col1: 'col1val1', col2: 'col2val1', col3: 'col3val1' },
-    { col1: 'col1val2', col2: 'col2val2', col3: 'col3val2' },
-    { col1: 'col1val3', col2: 'col2val3', col3: 'col3val3' },
+    { fruit: 'banana', meat: 'duck', colour: 'black' },
+    { fruit: 'pear', meat: 'duck', colour: 'orange' },
+    { fruit: 'orange', meat: 'duck', colour: 'white' },
+    { fruit: 'mangosteen', meat: 'duck', colour: 'orange' },
   ]
 
   const allValues: ValueObject = {}
 
   Object.keys(testData[0]).forEach((key) => {
     allValues[key] = testData.map((tableEntry) => tableEntry[key])
+  })
+
+  Object.keys(testData[0]).forEach((key) => {
+    allValues[key] = []
+    testData.forEach((tableEntry) => {
+      if (allValues[key].includes(tableEntry[key]) == false) {
+        allValues[key].push(tableEntry[key])
+      }
+    })
   })
 
   const [allowedFields, setAllowedFields] = useState(Object.keys(testData[0]))
