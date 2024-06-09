@@ -10,7 +10,9 @@ export interface ValueObject {
 
 export interface ControlPanelProps {
   allowedValues: ValueObject
+  allowedFields: string[]
   setAllowedValues: React.Dispatch<React.SetStateAction<ValueObject>>
+  setAllowedFields: React.Dispatch<React.SetStateAction<string[]>>
   allValues: ValueObject
 }
 

@@ -18,6 +18,8 @@ function App() {
     allValues[key] = testData.map((tableEntry) => tableEntry[key])
   })
 
+  const allFields = Object.keys(allValues)
+
   Object.keys(testData[0]).forEach((key) => {
     allValues[key] = []
     testData.forEach((tableEntry) => {
@@ -27,7 +29,7 @@ function App() {
     })
   })
 
-  const [allowedFields, setAllowedFields] = useState(Object.keys(testData[0]))
+  const [allowedFields, setAllowedFields] = useState(allFields)
 
   const [allowedValues, setAllowedValues] = useState(allValues)
 
@@ -35,7 +37,9 @@ function App() {
     <>
       <ControlPanel
         allowedValues={allowedValues}
+        allowedFields={allowedFields}
         setAllowedValues={setAllowedValues}
+        setAllowedFields={setAllowedFields}
         allValues={allValues}
       />
       <TableConstructor
