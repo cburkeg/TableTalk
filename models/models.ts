@@ -13,6 +13,8 @@ export interface ControlPanelProps {
   allowedFields: string[]
   setAllowedValues: React.Dispatch<React.SetStateAction<ValueObject>>
   setAllowedFields: React.Dispatch<React.SetStateAction<string[]>>
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>
+  setSearchField: React.Dispatch<React.SetStateAction<string>>
   allValues: ValueObject
 }
 
@@ -20,6 +22,8 @@ export interface TableConstructorProps {
   data: Data
   allowedValues: ValueObject
   allowedFields: string[]
+  searchQuery: string
+  searchField: string
 }
 
 export interface RowProps {

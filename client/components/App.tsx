@@ -33,6 +33,9 @@ function App() {
 
   const [allowedValues, setAllowedValues] = useState(allValues)
 
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchField, setSearchField] = useState<string>('')
+
   return (
     <>
       <ControlPanel
@@ -40,12 +43,16 @@ function App() {
         allowedFields={allowedFields}
         setAllowedValues={setAllowedValues}
         setAllowedFields={setAllowedFields}
+        setSearchQuery={setSearchQuery}
+        setSearchField={setSearchField}
         allValues={allValues}
       />
       <TableConstructor
         data={testData}
         allowedValues={allowedValues}
         allowedFields={allowedFields}
+        searchQuery={searchQuery}
+        searchField={searchField}
       />
     </>
   )

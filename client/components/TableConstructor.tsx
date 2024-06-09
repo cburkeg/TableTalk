@@ -9,14 +9,28 @@ function TableConstructor({
   data,
   allowedFields,
   allowedValues,
+  searchQuery,
+  searchField,
 }: TableConstructorProps) {
   // Helper fn to check if row should be conditionally rendered
-  function showRow(tableEntry: TableEntry, allowedValues: ValueObject) {
+  function showRow(
+    tableEntry: TableEntry,
+    allowedValues: ValueObject,
+    searchQuery: string,
+    searchField: string,
+  ) {
     let result = true
+    const regex = RegExp(`^${searchQuery}`)
 
     Object.keys(tableEntry).forEach((key) => {
       if (allowedValues[key].includes(tableEntry[key]) == false) {
         result = false
+      }
+
+      if (searchQuery.length != 0) {
+        if (!regex.test(tableEntry[searchField])) {
+          result = false
+        }
       }
     })
 
@@ -37,7 +51,12 @@ function TableConstructor({
           <tbody>
             {data.map(
               (tableEntry, index) =>
-                showRow(tableEntry, allowedValues) && (
+                showRow(
+                  tableEntry,
+                  allowedValues,
+                  searchQuery,
+                  searchField,
+                ) && (
                   <Row
                     key={'rowentry' + index}
                     tableEntry={tableEntry}

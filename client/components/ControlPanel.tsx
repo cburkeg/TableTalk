@@ -6,13 +6,20 @@ function ControlPanel({
   allowedFields,
   setAllowedValues,
   setAllowedFields,
+  setSearchQuery,
+  setSearchField,
   allValues,
 }: ControlPanelProps) {
   const [valueCheckedboxes, setValueCheckedboxes] = useState<CheckboxState>({})
   const [fieldCheckedboxes, setFieldCheckedboxes] = useState<CheckboxState>({})
+
   useEffect(() => {
     console.log(valueCheckedboxes)
   }, [valueCheckedboxes])
+
+  function handleSearchQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+  }
 
   function handleValueCheckboxChange(
     event: React.ChangeEvent<HTMLInputElement>,
@@ -80,6 +87,27 @@ function ControlPanel({
   return (
     <>
       {' '}
+      <div>
+        <h2>Search</h2>
+        <label htmlFor="searchqueryinput">Search query:</label>
+        <input
+          key={'searchqueryinput'}
+          type="text"
+          name="searchqueryinput"
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+        <select
+          key={'searchfieldinput'}
+          name="searchfieldinput"
+          onChange={(event) => setSearchField(event.target.value)}
+        >
+          {Object.keys(allValues).map((key) => (
+            <option value={key} key={`searchfieldoption` + key}>
+              {key}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <h2>Filter by field</h2>
         {Object.keys(allValues).map((key) => (
