@@ -10,6 +10,7 @@ function TableConstructor({
   allowedFields,
   allowedValues,
 }: TableConstructorProps) {
+  // Helper fn to check if row should be conditionally rendered
   function showRow(tableEntry: TableEntry, allowedValues: ValueObject) {
     let result = true
 

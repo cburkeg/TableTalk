@@ -26,6 +26,7 @@ function App() {
       <ControlPanel
         allowedValues={allowedValues}
         setAllowedValues={setAllowedValues}
+        allValues={allValues}
       />
       <TableConstructor
         data={testData}

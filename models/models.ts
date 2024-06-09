@@ -11,6 +11,7 @@ export interface ValueObject {
 export interface ControlPanelProps {
   allowedValues: ValueObject
   setAllowedValues: React.Dispatch<React.SetStateAction<ValueObject>>
+  allValues: ValueObject
 }
 
 export interface TableConstructorProps {
@@ -22,4 +23,8 @@ export interface TableConstructorProps {
 export interface RowProps {
   tableEntry: TableEntry
   allowedFields: string[]
+}
+
+export interface CheckboxState {
+  [key: string]: boolean
 }
