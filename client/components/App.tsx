@@ -37,57 +37,29 @@ function App() {
   const [searchField, setSearchField] = useState<string>('')
 
   return (
-    <>
-      <ControlPanel
-        allowedValues={allowedValues}
-        allowedFields={allowedFields}
-        setAllowedValues={setAllowedValues}
-        setAllowedFields={setAllowedFields}
-        setSearchQuery={setSearchQuery}
-        setSearchField={setSearchField}
-        allValues={allValues}
-      />
-      <TableConstructor
-        data={testData}
-        allowedValues={allowedValues}
-        allowedFields={allowedFields}
-        searchQuery={searchQuery}
-        searchField={searchField}
-      />
-    </>
+    <div className="appcontainer">
+      <div className="controlpanelcolumn">
+        <ControlPanel
+          allowedValues={allowedValues}
+          allowedFields={allowedFields}
+          setAllowedValues={setAllowedValues}
+          setAllowedFields={setAllowedFields}
+          setSearchQuery={setSearchQuery}
+          setSearchField={setSearchField}
+          allValues={allValues}
+        />
+      </div>
+      <div className="tablecolumn">
+        <TableConstructor
+          data={testData}
+          allowedValues={allowedValues}
+          allowedFields={allowedFields}
+          searchQuery={searchQuery}
+          searchField={searchField}
+        />
+      </div>
+    </div>
   )
 }
 
 export default App
-
-// return (
-//   <>
-//     <div>
-//       <label>
-//         What do we eat?
-//         <select>
-//           <option value="fruit">Fruit</option>
-
-//           <option value="vegetable">Vegetable</option>
-
-//           <option value="meat">Meat</option>
-//         </select>
-//       </label>
-//     </div>
-//   </>
-// )
-
-{
-  /* <div>
-<label>
-  What do we eat?
-  <select>
-    <option value="fruit">Fruit</option>
-
-    <option value="vegetable">Vegetable</option>
-
-    <option value="meat">Meat</option>
-  </select>
-</label>
-</div> */
-}

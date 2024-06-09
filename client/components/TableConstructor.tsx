@@ -39,9 +39,9 @@ function TableConstructor({
 
   if (data && allowedValues && allowedFields.length != 0) {
     return (
-      <div>
-        <table>
-          <thead>
+      <div className="datatablecontainer">
+        <table className="datatable">
+          <thead className="datatablehead">
             <tr>
               {allowedFields.map((field) => (
                 <th key={'tableheader' + field}>{field}</th>

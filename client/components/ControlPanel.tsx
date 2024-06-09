@@ -17,10 +17,6 @@ function ControlPanel({
     console.log(valueCheckedboxes)
   }, [valueCheckedboxes])
 
-  function handleSearchQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target
-  }
-
   function handleValueCheckboxChange(
     event: React.ChangeEvent<HTMLInputElement>,
   ) {
@@ -31,8 +27,6 @@ function ControlPanel({
 
     const updatedValueCheckedboxes = { ...valueCheckedboxes, [name]: checked }
     setValueCheckedboxes(updatedValueCheckedboxes)
-
-    // console.log(checkedBoxes)
 
     const updatedAllowedValues = { ...allowedValues }
     if (checked == false) {
@@ -55,8 +49,6 @@ function ControlPanel({
 
     const updatedFieldCheckedboxes = { ...fieldCheckedboxes, [name]: checked }
     setFieldCheckedboxes(updatedFieldCheckedboxes)
-
-    // console.log(checkedBoxes)
 
     const updatedAllowedFields = [...allowedFields]
     if (checked == false) {
@@ -85,11 +77,10 @@ function ControlPanel({
   }
 
   return (
-    <>
+    <div className="controlpanel">
       {' '}
-      <div>
+      <div className="controlpanelsearch">
         <h2>Search</h2>
-        <label htmlFor="searchqueryinput">Search query:</label>
         <input
           key={'searchqueryinput'}
           type="text"
@@ -108,7 +99,7 @@ function ControlPanel({
           ))}
         </select>
       </div>
-      <div>
+      <div className="controlpanelfilterbyfield">
         <h2>Filter by field</h2>
         {Object.keys(allValues).map((key) => (
           <p key={'fieldpara' + key}>
@@ -127,33 +118,39 @@ function ControlPanel({
           </p>
         ))}
       </div>
-      {Object.keys(allValues).map((key) => (
-        <div key={'controlpaneldiv' + key}>
-          <h1 key={'controlpanelheading' + key}>{key}</h1>
-          {allValues[key].map((value) => {
-            console.log(`${key},${value}`, valueCheckedboxes)
-            return (
-              <>
-                <p key={'valuepara' + key + value}>
-                  {value}
-                  <input
-                    key={'valuecheckbox' + key + value}
-                    type="checkbox"
-                    name={`${key},${value}`}
-                    checked={
-                      valueCheckedboxes[`${key},${value}`] !== undefined
-                        ? valueCheckedboxes[`${key},${value}`]
-                        : true
-                    }
-                    onChange={handleValueCheckboxChange}
-                  />
-                </p>
-              </>
-            )
-          })}
-        </div>
-      ))}
-    </>
+      <div className="controlpanelfilterbyvaluecontainer">
+        <h2>Filter by value</h2>
+        {Object.keys(allValues).map((key) => (
+          <div
+            key={'controlpaneldiv' + key}
+            className="controlpanelfilterbyvalue"
+          >
+            <h3 key={'controlpanelheading' + key}>{key}</h3>
+            {allValues[key].map((value) => {
+              console.log(`${key},${value}`, valueCheckedboxes)
+              return (
+                <>
+                  <p key={'valuepara' + key + value}>
+                    {value}
+                    <input
+                      key={'valuecheckbox' + key + value}
+                      type="checkbox"
+                      name={`${key},${value}`}
+                      checked={
+                        valueCheckedboxes[`${key},${value}`] !== undefined
+                          ? valueCheckedboxes[`${key},${value}`]
+                          : true
+                      }
+                      onChange={handleValueCheckboxChange}
+                    />
+                  </p>
+                </>
+              )
+            })}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
