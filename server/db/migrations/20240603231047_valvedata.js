@@ -5,7 +5,6 @@
 export function up(knex) {
   return knex.schema.createTable('valvedata', (table) => {
     table.string('type').primary()
-    table.integer('valve_variety_id')
     table.integer('filamentV')
     table.integer('filamentA')
   })

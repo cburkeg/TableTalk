@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export async function seed(knex) {
+export const seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('valvevarieties').del()
   await knex('valvevarieties').insert([

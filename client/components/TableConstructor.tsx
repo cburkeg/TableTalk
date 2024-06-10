@@ -20,7 +20,7 @@ function TableConstructor({
     searchField: string,
   ) {
     let result = true
-    const regex = RegExp(`^${searchQuery}`)
+    const regex = RegExp(`^${searchQuery}`, 'i')
 
     Object.keys(tableEntry).forEach((key) => {
       if (allowedValues[key].includes(tableEntry[key]) == false) {

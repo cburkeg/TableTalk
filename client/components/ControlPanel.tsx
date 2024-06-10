@@ -100,7 +100,7 @@ function ControlPanel({
         </select>
       </div>
       <div className="controlpanelfilterbyfield">
-        <h2>Filter by field</h2>
+        <h2>Display fields</h2>
         {Object.keys(allValues).map((key) => (
           <p key={'fieldpara' + key}>
             {key}
@@ -131,7 +131,7 @@ function ControlPanel({
               return (
                 <>
                   <p key={'valuepara' + key + value}>
-                    {value}
+                    {value != '' ? value : 'Null'}
                     <input
                       key={'valuecheckbox' + key + value}
                       type="checkbox"

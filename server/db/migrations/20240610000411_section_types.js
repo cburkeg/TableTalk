@@ -3,9 +3,9 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable('valvevarieties', (table) => {
+  return knex.schema.createTable('section_types', (table) => {
     table.increments('id').primary()
-    table.string('valve_variety')
+    table.string('section_type')
   })
 }
 
@@ -14,5 +14,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable('valvevarieties')
+  return knex.schema.dropTable('section_types')
 }
