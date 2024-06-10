@@ -226,10 +226,6 @@ function App() {
 
   const allValues: ValueObject = {}
 
-  Object.keys(testData[0]).forEach((key) => {
-    allValues[key] = testData.map((tableEntry) => tableEntry[key])
-  })
-
   const allFields = Object.keys(allValues)
 
   Object.keys(testData[0]).forEach((key) => {
