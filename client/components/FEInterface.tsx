@@ -47,7 +47,7 @@ function FEInterface({ data }: FEInterfaceProps) {
           searchField={searchField}
         />
         <div className="editpanel">
-          <EditPanel allValues={allValues} />
+          <EditPanel allValues={allValues} data={data} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import request from 'superagent'
-import { useQuery } from '@tanstack/react-query'
-import { Data } from '../../models/models'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Data, TableEntry } from '../../models/models'
 
 export function usePlaceholderdata() {
   return useQuery({
@@ -8,6 +8,23 @@ export function usePlaceholderdata() {
     queryFn: async () => {
       const res = await request.get('api/v1/placeholder')
       return res.body as Data
+    },
+  })
+}
+
+export function useUpdatePlaceholderdata() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (entry: TableEntry) => {
+      {
+        await request
+          .patch(`api/v1/placeholder/${entry[Object.keys(entry)[0]]}`)
+          .send(entry)
+      }
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ['datatable'] })
     },
   })
 }
