@@ -226,13 +226,13 @@ function App() {
 
   const allValues: ValueObject = {}
 
-  const allFields = Object.keys(allValues)
+  const allFields = Object.keys(testData[0])
 
-  Object.keys(testData[0]).forEach((key) => {
-    allValues[key] = []
+  allFields.forEach((field) => {
+    allValues[field] = []
     testData.forEach((tableEntry) => {
-      if (allValues[key].includes(tableEntry[key]) == false) {
-        allValues[key].push(tableEntry[key])
+      if (allValues[field].includes(tableEntry[field]) == false) {
+        allValues[field].push(tableEntry[field])
       }
     })
   })
@@ -242,9 +242,7 @@ function App() {
   const [allowedValues, setAllowedValues] = useState(allValues)
 
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const [searchField, setSearchField] = useState<string>(
-    Object.keys(allValues)[0],
-  )
+  const [searchField, setSearchField] = useState<string>(allFields[0])
 
   return (
     <div className="appcontainer">

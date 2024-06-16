@@ -1,5 +1,5 @@
 import { CheckboxState, ControlPanelProps } from '../../models/models'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function ControlPanel({
   allowedValues,
@@ -13,17 +13,12 @@ function ControlPanel({
   const [valueCheckedboxes, setValueCheckedboxes] = useState<CheckboxState>({})
   const [fieldCheckedboxes, setFieldCheckedboxes] = useState<CheckboxState>({})
 
-  useEffect(() => {
-    console.log(valueCheckedboxes)
-  }, [valueCheckedboxes])
-
   function handleValueCheckboxChange(
     event: React.ChangeEvent<HTMLInputElement>,
   ) {
     const { name, checked } = event.target
 
     const [field, value] = name.split(',')
-    console.log(checked)
 
     const updatedValueCheckedboxes = { ...valueCheckedboxes, [name]: checked }
     setValueCheckedboxes(updatedValueCheckedboxes)
@@ -51,6 +46,7 @@ function ControlPanel({
     setFieldCheckedboxes(updatedFieldCheckedboxes)
 
     const updatedAllowedFields = [...allowedFields]
+
     if (checked == false) {
       const fieldIndex = updatedAllowedFields.indexOf(field)
       updatedAllowedFields.splice(fieldIndex, 1)
