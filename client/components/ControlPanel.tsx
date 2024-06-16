@@ -86,6 +86,11 @@ function ControlPanel({
         <select
           key={'searchfieldinput'}
           name="searchfieldinput"
+          defaultValue={
+            Object.keys(allValues)[1]
+              ? Object.keys(allValues)[1]
+              : Object.keys(allValues)[0]
+          }
           onChange={(event) => setSearchField(event.target.value)}
         >
           {Object.keys(allValues).map((key) => (

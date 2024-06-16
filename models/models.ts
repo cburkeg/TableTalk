@@ -4,6 +4,10 @@ export interface TableEntry {
 
 export type Data = TableEntry[]
 
+export interface FEInterfaceProps {
+  data: Data
+}
+
 export interface ValueObject {
   [key: string]: string[]
 }
