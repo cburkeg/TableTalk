@@ -23,11 +23,12 @@ body {
 .appcontainer {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 100px;
+  /* grid-template-rows: 100px 100px; */
+  column-gap: 100px;
 }
 
 .controlpanelcolumn {
-  overflow-y: hidden;
+  overflow-y: scroll;
   grid-column: 1;
 }
 
@@ -63,11 +64,20 @@ body {
   margin-bottom: 20px;
 }
 
-.tablepanelcolumn {
+.editpanel {
+  background-color: #d0d0d0; /* Even darker grey */
+  padding: 10px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+/* .tablepanelcolumn {
+  padding: 100px;
+} */
+
+.tablecolumn {
   grid-column: 2;
-  min-height: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 /* .datatablecontainer {

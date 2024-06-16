@@ -1,5 +1,6 @@
 import { FEInterfaceProps, ValueObject } from '../../models/models'
 import ControlPanel from './ControlPanel'
+import { EditPanel } from './EditPanel'
 import TableConstructor from './TableConstructor'
 import { useState } from 'react'
 
@@ -45,6 +46,9 @@ function FEInterface({ data }: FEInterfaceProps) {
           searchQuery={searchQuery}
           searchField={searchField}
         />
+        <div className="editpanel">
+          <EditPanel allValues={allValues} />
+        </div>
       </div>
     </div>
   )
