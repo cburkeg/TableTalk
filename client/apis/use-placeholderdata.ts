@@ -28,3 +28,18 @@ export function useUpdatePlaceholderdata() {
     },
   })
 }
+
+export function useDeletePlaceholderdata() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (id: string | number) => {
+      {
+        await request.delete(`api/v1/placeholder/${String(id)}`)
+      }
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ['datatable'] })
+    },
+  })
+}

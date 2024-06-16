@@ -25,3 +25,8 @@ export async function updatePlaceholderData(
     Climate: updatedPlaceholder.Climate,
   })
 }
+
+export async function deletePlaceholderData(stringID: string) {
+  const id = Number(stringID)
+  return await db('placeholderdata').where({ id }).delete()
+}

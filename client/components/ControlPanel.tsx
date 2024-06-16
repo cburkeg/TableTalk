@@ -1,5 +1,5 @@
 import { CheckboxState, ControlPanelProps } from '../../models/models'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function ControlPanel({
   allowedValues,
@@ -12,6 +12,10 @@ function ControlPanel({
 }: ControlPanelProps) {
   const [valueCheckedboxes, setValueCheckedboxes] = useState<CheckboxState>({})
   const [fieldCheckedboxes, setFieldCheckedboxes] = useState<CheckboxState>({})
+
+  useEffect(() => {
+    console.log(valueCheckedboxes)
+  }, [valueCheckedboxes])
 
   function handleValueCheckboxChange(
     event: React.ChangeEvent<HTMLInputElement>,
@@ -40,7 +44,7 @@ function ControlPanel({
     const { name, checked } = event.target
 
     const field = name.split(',')[1]
-    console.log(checked)
+    // console.log(checked)
 
     const updatedFieldCheckedboxes = { ...fieldCheckedboxes, [name]: checked }
     setFieldCheckedboxes(updatedFieldCheckedboxes)
@@ -73,9 +77,9 @@ function ControlPanel({
   }
 
   return (
-    <div className="controlpanel">
+    <div className="controlpanel" key={'controlpaneldiv'}>
       {' '}
-      <div className="controlpanelsearch">
+      <div className="controlpanelsearch" key={'controlpanelsearch'}>
         <h2>Search</h2>
         <input
           key={'searchqueryinput'}
@@ -128,7 +132,7 @@ function ControlPanel({
           >
             <h3 key={'controlpanelheading' + key}>{key}</h3>
             {allValues[key].map((value) => {
-              console.log(`${key},${value}`, valueCheckedboxes)
+              // console.log(`${key},${value}`, valueCheckedboxes)
               return (
                 <>
                   <p key={'valuepara' + key + value}>

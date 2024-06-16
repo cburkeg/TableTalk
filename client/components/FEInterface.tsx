@@ -2,7 +2,7 @@ import { FEInterfaceProps, ValueObject } from '../../models/models'
 import ControlPanel from './ControlPanel'
 import { EditPanel } from './EditPanel'
 import TableConstructor from './TableConstructor'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function FEInterface({ data }: FEInterfaceProps) {
   const allValues: ValueObject = {}
@@ -12,8 +12,8 @@ function FEInterface({ data }: FEInterfaceProps) {
   allFields.forEach((field) => {
     allValues[field] = []
     data.forEach((tableEntry) => {
-      if (allValues[field].includes(tableEntry[field]) == false) {
-        allValues[field].push(tableEntry[field])
+      if (allValues[field].includes(String(tableEntry[field])) == false) {
+        allValues[field].push(String(tableEntry[field]))
       }
     })
   })
@@ -24,6 +24,10 @@ function FEInterface({ data }: FEInterfaceProps) {
 
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [searchField, setSearchField] = useState<string>(allFields[1])
+
+  useEffect(() => {
+    console.log(allowedValues)
+  }, [allowedValues])
 
   return (
     <div className="appcontainer">
@@ -47,7 +51,12 @@ function FEInterface({ data }: FEInterfaceProps) {
           searchField={searchField}
         />
         <div className="editpanel">
-          <EditPanel allValues={allValues} data={data} />
+          <EditPanel
+            allValues={allValues}
+            allowedValues={allowedValues}
+            setAllowedValues={setAllowedValues}
+            data={data}
+          />
         </div>
       </div>
     </div>

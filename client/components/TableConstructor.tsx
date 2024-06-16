@@ -23,12 +23,12 @@ function TableConstructor({
     const regex = RegExp(`^${searchQuery}`, 'i')
 
     Object.keys(tableEntry).forEach((key) => {
-      if (allowedValues[key].includes(tableEntry[key]) == false) {
+      if (allowedValues[key].includes(String(tableEntry[key])) == false) {
         result = false
       }
 
       if (searchQuery.length != 0) {
-        if (!regex.test(tableEntry[searchField])) {
+        if (!regex.test(String(tableEntry[searchField]))) {
           result = false
         }
       }

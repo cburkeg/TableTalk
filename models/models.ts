@@ -1,5 +1,5 @@
 export interface TableEntry {
-  [key: string]: string
+  [key: string]: string | number
 }
 
 export type Data = TableEntry[]
@@ -37,4 +37,11 @@ export interface RowProps {
 
 export interface CheckboxState {
   [key: string]: boolean
+}
+
+export interface EditPanelProps {
+  allValues: ValueObject
+  allowedValues: ValueObject
+  setAllowedValues: React.Dispatch<React.SetStateAction<ValueObject>>
+  data: Data
 }

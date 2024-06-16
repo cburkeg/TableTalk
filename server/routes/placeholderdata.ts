@@ -19,13 +19,26 @@ router.get('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-    const { id } = req.params
     const result = await db.updatePlaceholderData(req.body)
     if (result === 1) res.sendStatus(204)
     else res.sendStatus(404)
   } catch (error) {
     console.log(
       'There was an error trying to edit the placeholder data. The error was: ',
+    ),
+      console.error(error)
+    res.status(500)
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    await db.deletePlaceholderData(id)
+    res.sendStatus(204)
+  } catch (error) {
+    console.log(
+      'There was an error trying to delete the placeholder data. The error was: ',
     ),
       console.error(error)
     res.status(500)
