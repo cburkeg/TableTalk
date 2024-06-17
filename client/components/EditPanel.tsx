@@ -23,7 +23,7 @@ export function EditPanel({
       emptyForm[field] = ''
     }
   })
-  const [editFormData, setEditFormData] = useState({})
+  const [editFormData, setEditFormData] = useState<TableEntry>({})
   const [newFormData, setNewFormData] = useState(emptyForm)
   const updatePlaceholderdata = useUpdatePlaceholderdata()
   const deletePlaceholderdata = useDeletePlaceholderdata()
