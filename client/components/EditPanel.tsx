@@ -1,11 +1,7 @@
 import { FormEvent, useState } from 'react'
+import { EditPanelProps, TableEntry } from '../../models/models'
 import {
-  Data,
-  EditPanelProps,
-  TableEntry,
-  ValueObject,
-} from '../../models/models'
-import {
+  useAddPlaceholderdata,
   useDeletePlaceholderdata,
   useUpdatePlaceholderdata,
 } from '../apis/use-placeholderdata'
@@ -20,9 +16,18 @@ export function EditPanel({
 }: EditPanelProps) {
   const [displayForm, setDisplayForm] = useState<boolean | string>(false)
   const [id, setID] = useState(allValues[Object.keys(allValues)[0]][0])
-  const [editFormData, setEditFormData] = useState<TableEntry>({})
+
+  const emptyForm: TableEntry = {}
+  Object.keys(allValues).forEach((field, index) => {
+    if (index != 0) {
+      emptyForm[field] = ''
+    }
+  })
+  const [editFormData, setEditFormData] = useState({})
+  const [newFormData, setNewFormData] = useState(emptyForm)
   const updatePlaceholderdata = useUpdatePlaceholderdata()
   const deletePlaceholderdata = useDeletePlaceholderdata()
+  const addPlaceholderdata = useAddPlaceholderdata()
 
   function handleEditClick() {
     if (displayForm == 'edit') {
@@ -52,20 +57,6 @@ export function EditPanel({
     }
   }
 
-  function handleDeleteSubmit(event: FormEvent) {
-    event.preventDefault()
-    handleDeleteMutate(id)
-    setID([Object.keys(allValues)[0]][0])
-  }
-
-  async function handleEditMutate(tableEntry: TableEntry) {
-    updatePlaceholderdata.mutateAsync(tableEntry)
-  }
-
-  async function handleDeleteMutate(id: number | string) {
-    deletePlaceholderdata.mutateAsync(id)
-  }
-
   function handleEditSubmit(event: FormEvent) {
     event.preventDefault()
     handleEditMutate(editFormData)
@@ -76,6 +67,51 @@ export function EditPanel({
         setAllowedValues(updatedAllowedValues)
       }
     })
+  }
+
+  function handleDeleteSubmit(event: FormEvent) {
+    event.preventDefault()
+    handleDeleteMutate(id)
+    setID([Object.keys(allValues)[0]][1])
+  }
+
+  function handleAddSubmit(event: FormEvent) {
+    event.preventDefault()
+    handleAddMutate(newFormData)
+    const updatedAllowedValues = { ...allowedValues }
+    Object.keys(newFormData).forEach((field, index) => {
+      if (index != 0) {
+        if (!allValues[field].includes(String(newFormData[field]))) {
+          updatedAllowedValues[field].push(String(newFormData[field]))
+          setAllowedValues(updatedAllowedValues)
+        }
+      }
+    })
+  }
+
+  async function handleEditMutate(tableEntry: TableEntry) {
+    updatePlaceholderdata.mutateAsync(tableEntry)
+  }
+
+  async function handleDeleteMutate(id: number | string) {
+    deletePlaceholderdata.mutateAsync(id)
+  }
+
+  async function handleAddMutate(newEntry: TableEntry) {
+    try {
+      const newID = await addPlaceholderdata.mutateAsync(newEntry)
+      const updatedAllowedValues = { ...allowedValues }
+      Object.keys(newID).forEach((field) => {
+        updatedAllowedValues[field].push(String(newID[field]))
+      })
+      Object.keys(newEntry).forEach((field) => {
+        updatedAllowedValues[field].push(String(newEntry[field]))
+      })
+      setAllowedValues(updatedAllowedValues)
+      console.log('THE NEW ID IS: ', newID)
+    } catch (error) {
+      throw new Error()
+    }
   }
 
   return (
@@ -137,6 +173,29 @@ export function EditPanel({
             <button>
               Delete entry {Object.keys(allValues)[0]}: {id}
             </button>
+          </>
+        )}
+      </form>
+      <form onSubmit={handleAddSubmit} className="form">
+        {displayForm == 'new' && (
+          <>
+            {Object.keys(allValues).map((field) =>
+              Object.keys(allValues).indexOf(field) != 0 ? (
+                <input
+                  key={`newdatafield:${field}`}
+                  type="text"
+                  name={`newdatafield:${field}`}
+                  defaultValue={field}
+                  onChange={(event) => {
+                    setNewFormData({
+                      ...newFormData,
+                      [field]: event.target.value,
+                    })
+                  }}
+                />
+              ) : null,
+            )}
+            <button>Add new entry</button>
           </>
         )}
       </form>

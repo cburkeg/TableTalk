@@ -17,6 +17,20 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  try {
+    const newID = await db.addPlaceholderData(req.body)
+    if (newID) res.status(201).json(newID)
+    else res.sendStatus(500)
+  } catch (error) {
+    console.log(
+      'There was an error trying to add new placeholder data. The error was: ',
+    ),
+      console.error(error)
+    res.status(500)
+  }
+})
+
 router.patch('/:id', async (req, res) => {
   try {
     const result = await db.updatePlaceholderData(req.body)

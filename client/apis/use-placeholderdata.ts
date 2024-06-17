@@ -43,3 +43,21 @@ export function useDeletePlaceholderdata() {
     },
   })
 }
+
+export function useAddPlaceholderdata() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (newEntry: TableEntry) => {
+      {
+        const response = await request
+          .post('api/v1/placeholder/')
+          .send(newEntry)
+        return response.body[0]
+      }
+    },
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ['datatable'] })
+    },
+  })
+}

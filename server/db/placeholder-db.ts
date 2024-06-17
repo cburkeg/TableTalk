@@ -30,3 +30,9 @@ export async function deletePlaceholderData(stringID: string) {
   const id = Number(stringID)
   return await db('placeholderdata').where({ id }).delete()
 }
+
+export async function addPlaceholderData(
+  newEntry: Omit<UpdatedPlaceholder, 'id'>,
+): Promise<{ id: number }> {
+  return await db('placeholderdata').insert(newEntry).returning('id')
+}
