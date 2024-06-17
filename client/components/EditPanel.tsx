@@ -117,6 +117,7 @@ export function EditPanel({
   return (
     <>
       <select
+        aria-label="Drop-down menu for entry ID for edition/deletion"
         key={'editpanelidselect'}
         name="editpanelidselect"
         defaultValue={allValues[Object.keys(allValues)[0]][0]}
@@ -138,6 +139,7 @@ export function EditPanel({
             {Object.keys(allValues).map((field) =>
               Object.keys(allValues).indexOf(field) != 0 ? (
                 <input
+                  aria-label={`Text input form for edit field: ${field}`}
                   key={`editdatafield:${field}`}
                   type="text"
                   name={`editdatafield:${field}`}
@@ -151,6 +153,7 @@ export function EditPanel({
                 />
               ) : (
                 <input
+                  aria-label={`Fixed-value unique identifier ${field} for edit entry`}
                   key={`editdatafield:${field}`}
                   type="text"
                   name={`editdatafield:${field}`}
@@ -182,6 +185,7 @@ export function EditPanel({
             {Object.keys(allValues).map((field) =>
               Object.keys(allValues).indexOf(field) != 0 ? (
                 <input
+                  aria-label={`Text input form for new entry; field: ${field}`}
                   key={`newdatafield:${field}`}
                   type="text"
                   name={`newdatafield:${field}`}

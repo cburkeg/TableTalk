@@ -82,12 +82,14 @@ function ControlPanel({
       <div className="controlpanelsearch" key={'controlpanelsearch'}>
         <h2>Search</h2>
         <input
+          aria-label="Search query input"
           key={'searchqueryinput'}
           type="text"
           name="searchqueryinput"
           onChange={(event) => setSearchQuery(event.target.value)}
         />
         <select
+          aria-label="Search field select menu"
           key={'searchfieldinput'}
           name="searchfieldinput"
           defaultValue={
@@ -110,6 +112,7 @@ function ControlPanel({
           <p key={'fieldpara' + key}>
             {key}
             <input
+              aria-label={`Field checkbox for: ${key}`}
               key={'fieldcheckbox' + key}
               type="checkbox"
               name={`fieldcheckbox,${key}`}
@@ -138,6 +141,7 @@ function ControlPanel({
                   <p key={'valuepara' + key + value}>
                     {value != '' ? value : 'Null'}
                     <input
+                      aria-label={`Value checkbox for field ${key}; value is ${value}`}
                       key={'valuecheckbox' + key + value}
                       type="checkbox"
                       name={`${key},${value}`}

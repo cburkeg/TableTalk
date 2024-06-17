@@ -31,6 +31,7 @@ function FEInterface({ data }: FEInterfaceProps) {
 
   return (
     <div className="appcontainer">
+      <h1>Filterable database interface</h1>
       <div className="controlpanelcolumn">
         <ControlPanel
           allowedValues={allowedValues}
