@@ -69,10 +69,15 @@ export function EditPanel({
     })
   }
 
+  // Very janky fix to get delete rolling over properly - need to replace with something more robust asap
   function handleDeleteSubmit(event: FormEvent) {
     event.preventDefault()
     handleDeleteMutate(id)
-    setID([Object.keys(allValues)[0]][0])
+    if (allValues[Object.keys(allValues)[0]].indexOf(id) > 0) {
+      setID(allValues[Object.keys(allValues)[0]][0])
+    } else {
+      setID(allValues[Object.keys(allValues)[0]][1])
+    }
   }
 
   function handleAddSubmit(event: FormEvent) {
