@@ -121,7 +121,13 @@ export function EditPanel({
         key={'editpanelidselect'}
         name="editpanelidselect"
         defaultValue={allValues[Object.keys(allValues)[0]][0]}
-        onChange={(event) => setID(event.target.value)}
+        onChange={(event) => {
+          setID(event.target.value)
+          const dataEntry = data.find(
+            (entry) => entry[Object.keys(allValues)[0]] == event.target.value,
+          )
+          setEditFormData({ ...dataEntry })
+        }}
       >
         {allValues[Object.keys(allValues)[0]].map((value) => (
           <option value={value} key={`editpanelidselect` + value}>
@@ -143,7 +149,7 @@ export function EditPanel({
                   key={`editdatafield:${field}`}
                   type="text"
                   name={`editdatafield:${field}`}
-                  defaultValue={editFormData[field]}
+                  value={editFormData[field]}
                   onChange={(event) => {
                     setEditFormData({
                       ...editFormData,
