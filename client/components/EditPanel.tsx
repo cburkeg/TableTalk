@@ -72,7 +72,7 @@ export function EditPanel({
   function handleDeleteSubmit(event: FormEvent) {
     event.preventDefault()
     handleDeleteMutate(id)
-    setID([Object.keys(allValues)[0]][1])
+    setID([Object.keys(allValues)[0]][0])
   }
 
   function handleAddSubmit(event: FormEvent) {
