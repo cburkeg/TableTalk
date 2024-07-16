@@ -46,3 +46,7 @@ npm run knex migrate:latest
 npm run knex seed:run
 npm run dev
 ```
+
+## Commit History
+
+This project uses a template that was provided by Dev Academy during my studies, so the repo has a very large number of contributors and a very complex commit history. All code is written by me aside from some basic configuration code.
