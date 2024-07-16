@@ -40,7 +40,6 @@ To get started with TableTalk:
 5. run the dev script.
 
 ```
-git clone https://github.com/yourusername/TableTalk.git
 cd TableTalk
 npm i
 npm run knex migrate:latest
